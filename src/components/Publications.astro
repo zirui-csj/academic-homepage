@@ -1,0 +1,524 @@
+---
+/**
+ * F4 科研成果：类型/年份彩色胶囊筛选 + 成果卡片 + BibTeX 引用
+ * - 筛选为渐进增强：无 JS 时全部成果完整展示
+ */
+import SectionShell from './SectionShell.astro';
+import Icon from './Icon.astro';
+import type { SiteData } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const t = (k: string) => data.ui[k] ?? k;
+const PUB_TYPES = ['journal', 'conference', 'chapter'] as const;
+
+const pubs = [...data.publications].sort((a, b) => b.year - a.year);
+const years = [...new Set(pubs.map((p) => p.year))].sort((a, b) => b - a);
+// 始终展示全部类型筛选项（含暂无数据的类型，点击后显示空状态提示）
+const presentTypes = PUB_TYPES;
+
+const typeClass: Record<string, string> = {
+  journal: 'badge-journal',
+  conference: 'badge-conference',
+  chapter: 'badge-chapter',
+};
+---
+
+<SectionShell id="publications" title={t('section.publications')}>
+  <div class="pub-toolbar" data-reveal>
+    <div class="filter-group" role="group" aria-label={t('pub.allTypes')}>
+      <button type="button" class="filter-chip is-active" data-filter-type="all">{t('pub.allTypes')}</button>
+      {
+        presentTypes.map((ty) => (
+          <button type="button" class="filter-chip" data-filter-type={ty}>
+            {t(`pub.type.${ty}`)}
+          </button>
+        ))
+      }
+    </div>
+    <div class="filter-group" role="group" aria-label={t('pub.allYears')}>
+      <button type="button" class="filter-chip is-active" data-filter-year="all">{t('pub.allYears')}</button>
+      {years.map((y) => <button type="button" class="filter-chip" data-filter-year={y}>{y}</button>)}
+    </div>
+  </div>
+
+  <div class="pub-list" data-pub-list>
+    {
+      pubs.map((p, i) => (
+        <article
+          class="pub-card"
+          data-pub-item
+          data-type={p.type}
+          data-year={p.year}
+          data-reveal
+          style={`--reveal-delay:${Math.min(i * 60, 300)}ms`}
+        >
+          <div class="pub-badges">
+            <span class={`pub-type-badge ${typeClass[p.type]}`}>{t(`pub.type.${p.type}`)}</span>
+            {p.highlight && (
+              <span class="pub-selected">
+                <Icon name="star" size={12} />
+                <span>★</span>
+                {data.locale.short === 'zh' ? '代表作' : 'Selected'}
+              </span>
+            )}
+            {p.status && <span class="pub-status">{p.status}</span>}
+            {
+              p.bibtex && (
+                <details class="pub-details pub-cite pub-cite-inline">
+                  <summary>
+                    <Icon name="quote" size={14} />
+                    {t('pub.cite')}
+                  </summary>
+                  <div class="bibtex-box">
+                    <pre><code>{p.bibtex}</code></pre>
+                    <button
+                      type="button"
+                      class="bibtex-copy"
+                      data-copy-bibtex={p.bibtex}
+                      data-copied-label={t('pub.copied')}
+                    >
+                      {t('pub.copyBibtex')}
+                    </button>
+                  </div>
+                </details>
+              )
+            }
+          </div>
+
+          <h3 class="pub-title">
+            {p.url || p.doi ? (
+              <a href={p.url ?? `https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer">
+                {p.title}
+              </a>
+            ) : (
+              p.title
+            )}
+          </h3>
+
+          <p class="pub-authors">
+            {p.authors.map((a, idx) => (
+              <>
+                {idx > 0 && <span class="pub-sep">, </span>}
+                {a.isSelf ? <strong class="pub-self">{a.name}</strong> : <span>{a.name}</span>}
+              </>
+            ))}
+          </p>
+
+          <p class="pub-venue">
+            {
+              p.editors ? (
+                <>
+                  <span>In {p.editors}. </span>
+                  <em>{p.venue}</em>
+                  {p.volume && <span> ({p.volume})</span>}
+                  {p.pages && <span>, {p.pages}</span>}
+                  {p.publisher && <span>. {p.publisher}</span>}
+                </>
+              ) : (
+                <>
+                  <em>{p.venue}</em>
+                  {p.volume && <span>, {p.volume}</span>}
+                  {p.pages && <span>, pp. {p.pages}</span>}
+                  {p.type !== 'conference' && <span>, {p.year}</span>}
+                </>
+              )
+            }
+          </p>
+
+          {
+            p.abstract && (
+              <details class="pub-details">
+                <summary>
+                  <Icon name="chevron" size={14} />
+                  {data.locale.short === 'zh' ? '摘要' : 'Abstract'}
+                </summary>
+                <p class="pub-abstract">{p.abstract}</p>
+              </details>
+            )
+          }
+
+          {
+            (p.pdf || p.code || p.doi) && (
+              <div class="pub-actions">
+                {p.pdf && (
+                  <a class="pub-link" href={p.pdf} target="_blank" rel="noopener noreferrer">
+                    <Icon name="file" size={15} /> {t('pub.pdf')}
+                  </a>
+                )}
+                {p.code && (
+                  <a class="pub-link" href={p.code} target="_blank" rel="noopener noreferrer">
+                    <Icon name="code" size={15} /> {t('pub.code')}
+                  </a>
+                )}
+                {p.doi && (
+                  <a class="pub-link" href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer">
+                    <Icon name="link" size={15} /> {t('pub.doi')}
+                  </a>
+                )}
+              </div>
+            )
+          }
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="pub-empty" data-pub-empty hidden>
+    {data.locale.short === 'zh' ? '没有符合筛选条件的成果。' : 'No publications match the current filters.'}
+  </p>
+</SectionShell>
+
+<style>
+  .pub-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .filter-chip {
+    padding: 6px 15px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .filter-chip:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+  .filter-chip.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(59, 91, 219, 0.28);
+  }
+
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .pub-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 22px 26px;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform var(--dur-mid) var(--ease-out),
+      box-shadow var(--dur-mid) var(--ease-out),
+      border-color var(--dur-mid) var(--ease-out);
+  }
+  .pub-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-border-strong);
+  }
+  .pub-card.is-hidden {
+    display: none;
+  }
+  .pub-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .pub-type-badge {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 11px;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.01em;
+  }
+  .badge-journal {
+    background: var(--color-primary-soft);
+    color: var(--color-primary-strong);
+  }
+  .badge-conference {
+    background: var(--color-accent-teal-soft);
+    color: var(--color-accent-teal);
+  }
+  .badge-chapter {
+    background: #ede9fe;
+    color: #7c3aed;
+  }
+  .badge-patent {
+    background: var(--color-accent-amber-soft);
+    color: var(--color-accent-amber);
+  }
+  .badge-project {
+    background: var(--color-accent-coral-soft);
+    color: var(--color-accent-coral);
+  }
+  .badge-preprint {
+    background: var(--color-bg-soft);
+    color: var(--color-text-muted);
+  }
+  .pub-selected {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent-amber);
+  }
+  .pub-status {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-accent-coral);
+    background: var(--color-accent-coral-soft);
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .pub-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin-bottom: 5px;
+  }
+  .pub-title a {
+    color: var(--color-text);
+    background-image: linear-gradient(var(--color-primary), var(--color-primary));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background-size var(--dur-mid) var(--ease-out);
+  }
+  .pub-title a:hover {
+    color: var(--color-primary);
+    background-size: 100% 2px;
+  }
+  .pub-authors {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 2px;
+  }
+  .pub-self {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  .pub-sep {
+    white-space: pre;
+  }
+  .pub-venue {
+    font-size: 13.5px;
+    color: var(--color-text-faint);
+    margin: 0 0 10px;
+    white-space: pre-line;
+  }
+  .pub-venue em {
+    font-style: italic;
+  }
+  .pub-details {
+    margin-top: 6px;
+  }
+  .pub-details summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .pub-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .pub-details summary svg {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .pub-details[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .pub-abstract {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    padding: 12px 16px;
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+  }
+  .pub-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 12px;
+    align-items: center;
+  }
+  .pub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+  .pub-link:hover {
+    color: var(--color-primary);
+  }
+  .pub-cite summary {
+    color: var(--color-text-muted);
+  }
+  .pub-cite[open] summary {
+    color: var(--color-primary);
+  }
+  /* 内联到首行右侧的 Cite 按钮 */
+  .pub-cite-inline {
+    margin-left: auto;
+    margin-top: 0;
+  }
+  .pub-cite-inline summary {
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 3px 11px;
+    border-radius: var(--radius-pill);
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
+  }
+  .pub-cite-inline summary:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  .pub-cite-inline[open] .bibtex-box {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    width: min(460px, 80vw);
+    z-index: 5;
+  }
+  .pub-badges {
+    position: relative;
+  }
+  .bibtex-box {
+    position: relative;
+    margin-top: 10px;
+  }
+  .bibtex-box pre {
+    margin: 0;
+    padding: 14px 16px;
+    background: #20242b;
+    color: #d8d5cc;
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .bibtex-copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-pill);
+    transition: background var(--dur-fast) var(--ease-out);
+  }
+  .bibtex-copy:hover {
+    background: var(--color-primary-strong);
+  }
+  .pub-empty {
+    text-align: center;
+    color: var(--color-text-faint);
+    padding: var(--space-6) 0;
+    font-size: 14.5px;
+  }
+
+  @media (max-width: 600px) {
+    .pub-card {
+      padding: 18px 18px;
+    }
+  }
+</style>
+
+<script>
+  // 成果筛选（渐进增强）：类型 + 年份
+  const list = document.querySelector<HTMLElement>('[data-pub-list]');
+  const emptyHint = document.querySelector<HTMLElement>('[data-pub-empty]');
+  if (list) {
+    const state = { type: 'all', year: 'all' };
+
+    const apply = () => {
+      let visible = 0;
+      list.querySelectorAll<HTMLElement>('[data-pub-item]').forEach((card) => {
+        const okType = state.type === 'all' || card.dataset.type === state.type;
+        const okYear = state.year === 'all' || card.dataset.year === state.year;
+        const show = okType && okYear;
+        card.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+      if (emptyHint) emptyHint.hidden = visible !== 0;
+    };
+
+    const bind = (attr: 'type' | 'year', key: 'type' | 'year') => {
+      document.querySelectorAll<HTMLButtonElement>(`[data-filter-${attr}]`).forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state[key] = btn.dataset[`filter${key === 'type' ? 'Type' : 'Year'}`] as string;
+          document
+            .querySelectorAll(`[data-filter-${attr}].is-active`)
+            .forEach((b) => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          apply();
+        });
+      });
+    };
+    bind('type', 'type');
+    bind('year', 'year');
+
+    // BibTeX 复制
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-bibtex]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const text = btn.dataset.copyBibtex ?? '';
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+        const original = btn.textContent;
+        btn.textContent = btn.dataset.copiedLabel ?? 'Copied';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.disabled = false;
+        }, 1800);
+      });
+    });
+  }
+</script>

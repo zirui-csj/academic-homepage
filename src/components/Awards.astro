@@ -1,0 +1,181 @@
+---
+/** F6 获奖情况：时间线（奖章节点）+ 分类筛选（学术/综合/其他）+ 时间排序 */
+import SectionShell from './SectionShell.astro';
+import Timeline, { type TimelineItem } from './Timeline.astro';
+import type { SiteData } from '../i18n/load';
+import { formatDate } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const t = (k: string) => data.ui[k] ?? k;
+const zh = data.locale.short === 'zh';
+
+const AWARD_CATS = ['academic', 'general', 'other'] as const;
+
+// 默认按获奖时间倒序（最新在前）
+const awards = [...data.awards].sort((a, b) => b.date.localeCompare(a.date));
+
+const items: TimelineItem[] = awards.map((a) => ({
+  period: formatDate(a.date, data.locale.short, data.ui['date.present']),
+  title: a.title,
+  subtitle: a.issuer,
+  tags: [a.level, a.rank].filter((x): x is string => !!x),
+  description: a.description,
+  category: a.category,
+  sortDate: a.date,
+}));
+---
+
+<SectionShell id="awards" title={data.ui['section.awards'] ?? 'Awards'}>
+  {
+    awards.length === 0 ? (
+      <p class="award-empty" data-reveal>
+        {zh ? '暂无获奖信息。' : 'No award information yet.'}
+      </p>
+    ) : (
+      <>
+        <div class="award-toolbar" data-reveal>
+          <div class="filter-group" role="group" aria-label={t('award.cat.all')}>
+            <button type="button" class="filter-chip is-active" data-award-filter-cat="all">
+              {t('award.cat.all')}
+            </button>
+            {AWARD_CATS.map((c) => (
+              <button type="button" class="filter-chip" data-award-filter-cat={c}>
+                {t(`award.cat.${c}`)}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            class="filter-chip sort-chip"
+            data-award-sort="desc"
+            data-label-desc={t('award.sort.desc')}
+            data-label-asc={t('award.sort.asc')}
+          >
+            {t('award.sort.desc')}
+          </button>
+        </div>
+
+        <div data-award-list>
+          <Timeline items={items} icon="medal" inlinePeriod />
+        </div>
+
+        <p class="award-empty award-empty--filtered" data-award-empty hidden>
+          {zh ? '没有符合筛选条件的奖项。' : 'No awards match the current filter.'}
+        </p>
+      </>
+    )
+  }
+</SectionShell>
+
+<style>
+  .award-empty {
+    text-align: center;
+    color: var(--color-text-faint);
+    padding: var(--space-6) 0;
+    font-size: 14.5px;
+  }
+  .award-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .filter-chip {
+    padding: 6px 15px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .filter-chip:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+  .filter-chip.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(59, 91, 219, 0.28);
+  }
+  .sort-chip {
+    flex: none;
+  }
+
+  @media (max-width: 600px) {
+    .award-toolbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<script>
+  // 获奖筛选（分类）+ 排序（时间正/倒序），渐进增强
+  const scope = document.querySelector<HTMLElement>('[data-award-list]');
+  const emptyHint = document.querySelector<HTMLElement>('[data-award-empty]');
+  if (scope) {
+    const ol = scope.querySelector<HTMLOListElement>('.timeline');
+    const state = { cat: 'all', sort: 'desc' };
+
+    const items = () => Array.from(ol?.querySelectorAll<HTMLElement>('[data-timeline-item]') ?? []);
+
+    const applyFilter = () => {
+      let visible = 0;
+      items().forEach((li) => {
+        const show = state.cat === 'all' || li.dataset.category === state.cat;
+        li.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+      if (emptyHint) emptyHint.hidden = visible !== 0;
+    };
+
+    const applySort = () => {
+      if (!ol) return;
+      const sorted = items().sort((a, b) => {
+        const da = a.dataset.date ?? '';
+        const db = b.dataset.date ?? '';
+        return state.sort === 'desc' ? db.localeCompare(da) : da.localeCompare(db);
+      });
+      sorted.forEach((li) => ol.appendChild(li));
+    };
+
+    document.querySelectorAll<HTMLButtonElement>('[data-award-filter-cat]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.cat = btn.dataset.awardFilterCat as string;
+        document
+          .querySelectorAll('[data-award-filter-cat].is-active')
+          .forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        applyFilter();
+      });
+    });
+
+    const sortBtn = document.querySelector<HTMLButtonElement>('[data-award-sort]');
+    sortBtn?.addEventListener('click', () => {
+      state.sort = state.sort === 'desc' ? 'asc' : 'desc';
+      sortBtn.textContent =
+        state.sort === 'desc'
+          ? (sortBtn.dataset.labelDesc ?? '')
+          : (sortBtn.dataset.labelAsc ?? '');
+      applySort();
+    });
+  }
+</script>

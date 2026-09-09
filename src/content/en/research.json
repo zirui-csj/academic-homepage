@@ -1,0 +1,22 @@
+[
+  {
+    "id": "history",
+    "title": "Chinese Historical Linguistics",
+    "icon": "layers"
+  },
+  {
+    "id": "dialectology",
+    "title": "Chinese Dialectology",
+    "icon": "globe"
+  },
+  {
+    "id": "morphology",
+    "title": "Morphology",
+    "icon": "brain"
+  },
+  {
+    "id": "morph-phon",
+    "title": "Morphology–Phonology Interface",
+    "icon": "code"
+  }
+]

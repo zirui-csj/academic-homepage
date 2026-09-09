@@ -1,0 +1,33 @@
+---
+/** 英文版首页（/en/）—— 内容全部取自 src/content/en/，与中文版相互独立 */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Education from '../../components/Education.astro';
+import Research from '../../components/Research.astro';
+import Publications from '../../components/Publications.astro';
+import Projects from '../../components/Projects.astro';
+import Awards from '../../components/Awards.astro';
+import { getSiteData } from '../../i18n/load';
+
+const data = getSiteData('en');
+
+const sectionComponents: Record<string, any> = {
+  education: Education,
+  research: Research,
+  publications: Publications,
+  projects: Projects,
+  awards: Awards,
+};
+---
+
+<BaseLayout data={data}>
+  <Hero data={data} />
+  {
+    data.sections
+      .filter((s) => s.visible)
+      .map((s) => {
+        const Component = sectionComponents[s.id];
+        return Component ? <Component data={data} /> : null;
+      })
+  }
+</BaseLayout>

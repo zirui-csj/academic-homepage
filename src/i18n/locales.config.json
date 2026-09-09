@@ -1,0 +1,18 @@
+[
+  {
+    "code": "zh-CN",
+    "short": "zh",
+    "name": "中文",
+    "dir": "ltr",
+    "isDefault": true,
+    "enabled": true
+  },
+  {
+    "code": "en",
+    "short": "en",
+    "name": "English",
+    "dir": "ltr",
+    "isDefault": false,
+    "enabled": true
+  }
+]

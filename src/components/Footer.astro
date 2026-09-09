@@ -1,0 +1,110 @@
+---
+/** F6 页脚：联系方式 / 学术链接 / 最后更新时间（构建时生成） */
+import Icon from './Icon.astro';
+import type { SiteData } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const t = (k: string) => data.ui[k] ?? k;
+const lastUpdated = new Date().toISOString().slice(0, 7); // YYYY-MM
+const lastUpdatedText =
+  data.locale.short === 'zh'
+    ? `${lastUpdated.slice(0, 4)}年${Number(lastUpdated.slice(5, 7))}月`
+    : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][
+        Number(lastUpdated.slice(5, 7)) - 1
+      ] + ` ${lastUpdated.slice(0, 4)}`;
+const langBase = data.locale.short === 'zh' ? '' : `/${data.locale.short}`;
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">{data.profile.name}</p>
+      <p class="footer-aff">{data.profile.affiliation}</p>
+    </div>
+    <div class="footer-links">
+      <a class="footer-link" href={`mailto:${data.profile.email}`} aria-label={t('hero.emailAria')}>
+        <Icon name="mail" size={17} />
+      </a>
+      {
+        data.profile.links.map((l) => (
+          <a
+            class="footer-link"
+            href={l.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={l.label}
+            title={l.label}
+          >
+            <Icon name={l.icon} size={17} />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {new Date().getFullYear()} {data.profile.name}. {t('footer.note')}</span>
+    <span>{t('footer.lastUpdated')}：{lastUpdatedText}</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-section);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-6);
+    flex-wrap: wrap;
+  }
+  .footer-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .footer-aff {
+    color: var(--color-text-muted);
+    font-size: 13.5px;
+    margin-top: 2px;
+  }
+  .footer-links {
+    display: flex;
+    gap: var(--space-2);
+  }
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .footer-link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: 12.5px;
+    color: var(--color-text-faint);
+    flex-wrap: wrap;
+  }
+</style>

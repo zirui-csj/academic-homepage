@@ -1,0 +1,54 @@
+[
+  {
+    "id": "zju-ba",
+    "startDate": "2017-09",
+    "endDate": "2021-06",
+    "institution": "Zhejiang University",
+    "degree": "BA [with distinction]",
+    "major": null,
+    "kind": "main"
+  },
+  {
+    "id": "cuhk-exchange",
+    "startDate": "2019-08",
+    "endDate": "2019-11",
+    "institution": "The Chinese University of Hong Kong",
+    "degree": "Exchange student",
+    "major": null,
+    "description": "International Asian Studies Programme (IASP)",
+    "kind": "secondary"
+  },
+  {
+    "id": "zju-ma",
+    "startDate": "2021-09",
+    "endDate": "2024-06",
+    "institution": "Zhejiang University",
+    "degree": "MA [with distinction]",
+    "major": null,
+    "advisor": "Weihui Wang",
+    "advisorLabel": "Supervisor",
+    "kind": "main"
+  },
+  {
+    "id": "pku-phd",
+    "startDate": "2024-09",
+    "endDate": "present",
+    "institution": "Peking University",
+    "degree": "Doctoral student",
+    "major": null,
+    "advisor": "Xiufang Dong",
+    "advisorLabel": "Supervisor",
+    "kind": "main"
+  },
+  {
+    "id": "ucb-visiting",
+    "startDate": "2026-08",
+    "endDate": "present",
+    "institution": "University of California at Berkeley",
+    "degree": "Visiting Scholar",
+    "major": null,
+    "advisor": "Hannah Sande",
+    "advisorLabel": "Host",
+    "kind": "secondary"
+  }
+]

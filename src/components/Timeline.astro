@@ -1,0 +1,239 @@
+---
+/**
+ * 通用时间线（教育经历 / 获奖情况共用）：主色节点 + 卡片
+ */
+import Icon from './Icon.astro';
+
+export interface TimelineItem {
+  period: string;
+  title: string;
+  subtitle?: string | null;
+  meta?: string | null;
+  tags?: string[];
+  description?: string | null;
+  /** 次要经历（交换/联培等）：弱化视觉样式 */
+  secondary?: boolean;
+  /** 分类（获奖情况筛选用） */
+  category?: string | null;
+  /** 可排序日期（YYYY-MM） */
+  sortDate?: string | null;
+}
+
+export interface Props {
+  items: TimelineItem[];
+  icon?: 'cap' | 'medal';
+  /** 时间标签与标题置于同一水平行（获奖情况使用） */
+  inlinePeriod?: boolean;
+}
+const { items, icon = 'cap', inlinePeriod = false } = Astro.props;
+---
+
+<ol class="timeline">
+  {
+    items.map((item, i) => (
+      <li
+        class:list={['timeline-item', { 'timeline-item--secondary': item.secondary }]}
+        data-reveal
+        data-timeline-item
+        data-category={item.category ?? undefined}
+        data-date={item.sortDate ?? undefined}
+        style={`--reveal-delay:${Math.min(i * 80, 320)}ms`}
+      >
+        <span class="timeline-node" aria-hidden="true">
+          <Icon name={icon} size={15} />
+        </span>
+        <div class="timeline-card">
+          {
+            inlinePeriod ? (
+              <div class="timeline-head">
+                <span class="timeline-period">{item.period}</span>
+                <h3 class="timeline-title">{item.title}</h3>
+              </div>
+            ) : (
+              <>
+                <div class="timeline-period">{item.period}</div>
+                <h3 class="timeline-title">{item.title}</h3>
+              </>
+            )
+          }
+          {item.subtitle && <p class="timeline-subtitle">{item.subtitle}</p>}
+          {item.meta && <p class="timeline-meta">{item.meta}</p>}
+          {item.tags && item.tags.length > 0 && (
+            <div class="timeline-tags">
+              {item.tags.map((tag) => <span class="tag tag-amber">{tag}</span>)}
+            </div>
+          )}
+          {item.description && <p class="timeline-desc">{item.description}</p>}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .timeline-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: var(--space-4);
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 34px;
+    bottom: -24px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--color-primary-soft), var(--color-border));
+  }
+  .timeline-item:last-child::before {
+    display: none;
+  }
+  .timeline-item.is-hidden {
+    display: none;
+  }
+  .timeline-node {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    border: 2px solid var(--color-surface);
+    box-shadow: 0 0 0 2px var(--color-primary-soft);
+    z-index: 1;
+    margin-top: 6px;
+  }
+  .timeline-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform var(--dur-mid) var(--ease-out),
+      box-shadow var(--dur-mid) var(--ease-out),
+      border-color var(--dur-mid) var(--ease-out);
+  }
+  .timeline-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-border-strong);
+  }
+  .timeline-period {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    background: var(--color-primary-softer);
+    padding: 3px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 10px;
+  }
+  .timeline-title {
+    font-size: 17.5px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  /* 时间标签与标题同行（获奖情况） */
+  .timeline-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .timeline-head .timeline-period {
+    flex: none;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+  .timeline-head .timeline-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+  .timeline-subtitle {
+    font-size: 14.5px;
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .timeline-meta {
+    font-size: 13.5px;
+    color: var(--color-text-faint);
+    margin-top: 2px;
+  }
+  .timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .timeline-desc {
+    margin-top: 10px;
+    font-size: 14.5px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 3px 11px;
+    border-radius: var(--radius-pill);
+  }
+  .tag-amber {
+    background: var(--color-accent-amber-soft);
+    color: var(--color-accent-amber);
+  }
+
+  /* 次要经历（交换生 / 联合培养）：弱化但可读，与主经历形成层级区分 */
+  .timeline-item--secondary .timeline-node {
+    background: var(--color-bg-soft);
+    color: var(--color-text-faint);
+    box-shadow: 0 0 0 2px var(--color-border);
+  }
+  .timeline-item--secondary .timeline-card {
+    background: var(--color-primary-softer);
+    border-color: var(--color-border);
+    border-style: dashed;
+    margin-left: 32px;
+  }
+  .timeline-item--secondary .timeline-card:hover {
+    border-color: var(--color-border-strong);
+  }
+  .timeline-item--secondary .timeline-period {
+    color: var(--color-text-muted);
+    background: var(--color-bg-soft);
+  }
+  .timeline-item--secondary .timeline-title {
+    color: var(--color-text-muted);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .timeline-item--secondary .timeline-subtitle {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+  @media (max-width: 600px) {
+    .timeline {
+      padding-left: 0;
+    }
+    .timeline-card {
+      padding: 16px 18px;
+    }
+    .timeline-item--secondary .timeline-card {
+      margin-left: 14px;
+    }
+  }
+</style>

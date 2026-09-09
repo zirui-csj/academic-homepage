@@ -1,0 +1,83 @@
+---
+/**
+ * F15.2 Hero 装饰图形层：低饱和渐变光斑 + 点阵纹理，纯 CSS/SVG 实现（零图片请求）
+ * 仅作氛围点缀，移动端自动收敛（§5.5）
+ */
+---
+
+<div class="hero-decor" aria-hidden="true">
+  <div class="blob blob-primary"></div>
+  <div class="blob blob-teal"></div>
+  <div class="blob blob-amber"></div>
+  <div class="dot-grid"></div>
+</div>
+
+<style>
+  .hero-decor {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.5;
+  }
+  .blob-primary {
+    width: 420px;
+    height: 420px;
+    top: -160px;
+    right: -80px;
+    background: radial-gradient(circle, var(--color-primary-soft), transparent 70%);
+  }
+  .blob-teal {
+    width: 320px;
+    height: 320px;
+    bottom: -140px;
+    left: -60px;
+    background: radial-gradient(circle, var(--color-accent-teal-soft), transparent 70%);
+  }
+  .blob-amber {
+    width: 220px;
+    height: 220px;
+    top: 40%;
+    left: 42%;
+    background: radial-gradient(circle, var(--color-accent-amber-soft), transparent 70%);
+    opacity: 0.7;
+  }
+  .dot-grid {
+    position: absolute;
+    top: 90px;
+    right: 6%;
+    width: 220px;
+    height: 220px;
+    background-image: radial-gradient(var(--color-border-strong) 1.4px, transparent 1.4px);
+    background-size: 18px 18px;
+    -webkit-mask-image: radial-gradient(circle, #000 30%, transparent 75%);
+    mask-image: radial-gradient(circle, #000 30%, transparent 75%);
+    opacity: 0.5;
+  }
+  @media (max-width: 767px) {
+    .blob-amber,
+    .dot-grid {
+      display: none;
+    }
+    .blob-primary {
+      width: 280px;
+      height: 280px;
+      top: -120px;
+      right: -100px;
+      opacity: 0.4;
+    }
+    .blob-teal {
+      width: 220px;
+      height: 220px;
+      bottom: -100px;
+      left: -80px;
+      opacity: 0.4;
+    }
+  }
+</style>

@@ -1,0 +1,55 @@
+[
+  {
+    "id": "zju-ba",
+    "startDate": "2017-09",
+    "endDate": "2021-06",
+    "institution": "浙江大学",
+    "department": "文学院",
+    "degree": "文学学士",
+    "major": "汉语言文学",
+    "kind": "main"
+  },
+  {
+    "id": "cuhk-exchange",
+    "startDate": "2019-08",
+    "endDate": "2019-11",
+    "institution": "香港中文大学",
+    "degree": "交换生（IASP项目）",
+    "major": null,
+    "kind": "secondary"
+  },
+  {
+    "id": "zju-ma",
+    "startDate": "2021-09",
+    "endDate": "2024-06",
+    "institution": "浙江大学",
+    "department": "文学院",
+    "degree": "文学硕士",
+    "major": "汉语言文字学",
+    "advisor": "汪维辉",
+    "kind": "main"
+  },
+  {
+    "id": "pku-phd",
+    "startDate": "2024-09",
+    "endDate": "present",
+    "institution": "北京大学",
+    "department": "中国语言文学系",
+    "degree": "博士研究生",
+    "major": "语言学及应用语言学",
+    "advisor": "董秀芳",
+    "kind": "main"
+  },
+  {
+    "id": "ucb-visiting",
+    "startDate": "2026-08",
+    "endDate": "present",
+    "institution": "加州大学伯克利分校",
+    "department": "语言学系",
+    "degree": "联合培养博士（国家公派留学）",
+    "major": null,
+    "advisor": "Hannah Sande",
+    "advisorLabel": "合作导师",
+    "kind": "secondary"
+  }
+]

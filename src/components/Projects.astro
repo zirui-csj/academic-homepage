@@ -1,0 +1,240 @@
+---
+/** F5 科研项目：项目卡片（名称（年度） / 资助机构 / 批准号 / 负责人 / 参与身份），支持按年度筛选 */
+import SectionShell from './SectionShell.astro';
+import type { SiteData } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const t = (k: string) => data.ui[k] ?? k;
+const zh = data.locale.short === 'zh';
+
+const projects = [...data.projects].sort((a, b) => b.year.localeCompare(a.year));
+const years = [...new Set(projects.map((p) => p.year))].sort((a, b) => b.localeCompare(a));
+---
+
+<SectionShell id="projects" title={t('section.projects')}>
+  {
+    projects.length === 0 ? (
+      <p class="proj-empty" data-reveal>
+        {zh ? '暂无项目信息。' : 'No project information yet.'}
+      </p>
+    ) : (
+      <>
+        <div class="proj-toolbar" data-reveal>
+          <div class="filter-group" role="group" aria-label={t('proj.allYears')}>
+            <button type="button" class="filter-chip is-active" data-proj-filter-year="all">
+              {t('proj.allYears')}
+            </button>
+            {years.map((y) => (
+              <button type="button" class="filter-chip" data-proj-filter-year={y}>{y}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="proj-list" data-proj-list>
+          {projects.map((p, i) => (
+            <article
+              class="proj-card"
+              data-proj-item
+              data-year={p.year}
+              data-reveal
+              style={`--reveal-delay:${Math.min(i * 60, 300)}ms`}
+            >
+              <h3 class="proj-title">
+                {p.title}
+                <span class="proj-year">{zh ? `（${p.year}）` : ` (${p.year})`}</span>
+              </h3>
+
+              <dl class="proj-fields">
+                <div class="proj-field">
+                  <dt>{t('proj.agency')}</dt>
+                  <dd>{p.fundingAgency}</dd>
+                </div>
+                {p.grantNumber && (
+                  <div class="proj-field">
+                    <dt>{t('proj.grant')}</dt>
+                    <dd class="proj-grant">{p.grantNumber}</dd>
+                  </div>
+                )}
+                {p.pi && (
+                  <div class="proj-field">
+                    <dt>{t('proj.pi')}</dt>
+                    <dd>{p.pi}</dd>
+                  </div>
+                )}
+                <div class="proj-field">
+                  <dt>{t('proj.role')}</dt>
+                  <dd class="proj-role">{p.role}</dd>
+                </div>
+              </dl>
+            </article>
+          ))}
+        </div>
+
+        <p class="proj-empty" data-proj-empty hidden>
+          {zh ? '没有符合筛选条件的项目。' : 'No projects match the current filters.'}
+        </p>
+      </>
+    )
+  }
+</SectionShell>
+
+<style>
+  .proj-empty {
+    text-align: center;
+    color: var(--color-text-faint);
+    padding: var(--space-6) 0;
+    font-size: 14.5px;
+  }
+  .proj-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .filter-chip {
+    padding: 6px 15px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .filter-chip:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+  .filter-chip.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(59, 91, 219, 0.28);
+  }
+
+  .proj-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .proj-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 22px 26px;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform var(--dur-mid) var(--ease-out),
+      box-shadow var(--dur-mid) var(--ease-out),
+      border-color var(--dur-mid) var(--ease-out);
+  }
+  .proj-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-border-strong);
+  }
+  .proj-card.is-hidden {
+    display: none;
+  }
+  .proj-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0 0 14px;
+  }
+  .proj-year {
+    font-weight: 600;
+    color: var(--color-text-faint);
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .proj-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+    margin: 0;
+  }
+  .proj-field {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .proj-field dt {
+    flex: none;
+    color: var(--color-text-faint);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .proj-field dt::after {
+    content: '：';
+  }
+  .proj-field dd {
+    margin: 0;
+    color: var(--color-text);
+  }
+  .proj-role {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .proj-grant {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .proj-card {
+      padding: 18px 18px;
+    }
+    .proj-fields {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+</style>
+
+<script>
+  // 科研项目筛选（渐进增强）：按年度
+  const list = document.querySelector<HTMLElement>('[data-proj-list]');
+  const emptyHint = document.querySelector<HTMLElement>('[data-proj-empty]');
+  if (list) {
+    let stateYear = 'all';
+
+    const apply = () => {
+      let visible = 0;
+      list.querySelectorAll<HTMLElement>('[data-proj-item]').forEach((card) => {
+        const show = stateYear === 'all' || card.dataset.year === stateYear;
+        card.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+      if (emptyHint) emptyHint.hidden = visible !== 0;
+    };
+
+    document.querySelectorAll<HTMLButtonElement>('[data-proj-filter-year]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        stateYear = btn.dataset.projFilterYear as string;
+        document
+          .querySelectorAll('[data-proj-filter-year].is-active')
+          .forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        apply();
+      });
+    });
+  }
+</script>

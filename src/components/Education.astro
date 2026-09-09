@@ -1,0 +1,29 @@
+---
+/** F2 教育经历：数据映射为通用时间线 */
+import SectionShell from './SectionShell.astro';
+import Timeline, { type TimelineItem } from './Timeline.astro';
+import type { SiteData } from '../i18n/load';
+import { formatPeriod } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const t = (k: string) => data.ui[k] ?? k;
+
+const zh = data.locale.short === 'zh';
+const sep = zh ? '：' : ': ';
+
+const items: TimelineItem[] = data.education.map((e) => ({
+  period: formatPeriod(e.startDate, e.endDate, data.locale.short, t('date.present')),
+  title: [e.degree, e.major].filter(Boolean).join(zh ? ' · ' : ', '),
+  subtitle: [e.institution, e.department].filter(Boolean).join(zh ? ' · ' : ', '),
+  meta: e.advisor ? `${e.advisorLabel ?? t('edu.advisor')}${sep}${e.advisor}` : null,
+  description: e.description,
+  secondary: e.kind === 'secondary',
+}));
+---
+
+<SectionShell id="education" title={t('section.education')}>
+  <Timeline items={items} icon="cap" />
+</SectionShell>

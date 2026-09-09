@@ -1,0 +1,377 @@
+[
+  {
+    "id": "j-2026a-lanxi",
+    "type": "journal",
+    "title": "The homophony syllabary of the Lanxi Dialect in Zhejiang Province",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Journal of Language and Culture Studies",
+    "year": 2026,
+    "editors": "Xing, Xiangdong (ed)",
+    "volume": "vol. 13",
+    "pages": "157–197",
+    "publisher": "Shanghai: Shanghai Lexicographical Publishing House",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@incollection{chen2026lanxi,\n  title={The homophony syllabary of the Lanxi Dialect in Zhejiang Province},\n  author={Chen, Sijie},\n  editor={Xing, Xiangdong},\n  booktitle={Journal of Language and Culture Studies},\n  volume={13},\n  pages={157--197},\n  year={2026},\n  address={Shanghai},\n  publisher={Shanghai Lexicographical Publishing House}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2026b-chuxi",
+    "type": "journal",
+    "title": "The source and process of transitivization of chuxi (出席), liexi (列席) and quexi (缺席)",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Bulletin of Linguistic Studies",
+    "year": 2026,
+    "editors": "Chen, Zhongmin (ed)",
+    "volume": "vol. 38",
+    "pages": "316–332",
+    "publisher": "Shanghai: Shanghai Lexicographical Publishing House",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@incollection{chen2026chuxi,\n  title={The source and process of transitivization of chuxi, liexi and quexi},\n  author={Chen, Sijie},\n  editor={Chen, Zhongmin},\n  booktitle={Bulletin of Linguistic Studies},\n  volume={38},\n  pages={316--332},\n  year={2026},\n  address={Shanghai},\n  publisher={Shanghai Lexicographical Publishing House}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2026c-zhi",
+    "type": "journal",
+    "title": "On the pronunciations and etymology of zhi (指) in words meaning “finger” in the Wu Dialects",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Essays on Linguistics",
+    "year": 2026,
+    "volume": "3",
+    "pages": "84–96",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@article{chen2026zhi,\n  title={On the pronunciations and etymology of zhi in words meaning finger in the Wu Dialects},\n  author={Chen, Sijie},\n  journal={Essays on Linguistics},\n  number={3},\n  pages={84--96},\n  year={2026}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "c-2026-qingnian",
+    "type": "conference",
+    "title": "Distinguishing Morphological Concepts: \"Gouci 构词 vs. Gouxing 构形\" and \"Derivation vs. Inflection\"",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "1st Youth Academic Conference of Chinese Linguistics (hosted by the Institute of Linguistics, Chinese Academy of Social Sciences), 2026.6.13-6.14",
+    "year": 2026,
+    "pages": null,
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@inproceedings{chen2026qingnian,\n  title={Distinguishing Morphological Concepts: \"Gouci 构词 vs. Gouxing 构形\" and \"Derivation vs. Inflection\"},\n  author={Chen, Sijie},\n  booktitle={1st Youth Academic Conference of Chinese Linguistics},\n  year={2026}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2025-lihai",
+    "type": "journal",
+    "title": "How lìhài(利害) changed into lìhɑi(厉害)──From the perspective of character usage in the history of Chinese vocabulary",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      },
+      {
+        "name": "Weihui Wang"
+      }
+    ],
+    "venue": "Studies in Language and Linguistics",
+    "year": 2025,
+    "volume": "45(2)",
+    "pages": "87–94",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@article{chenwang2025lihai,\n  title={How lihai changed into lihai: From the perspective of character usage in the history of Chinese vocabulary},\n  author={Chen, Sijie and Wang, Weihui},\n  journal={Studies in Language and Linguistics},\n  volume={45},\n  number={2},\n  pages={87--94},\n  year={2025}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "c-2025-icccg",
+    "type": "conference",
+    "title": "Can evaluative morphology change the lexical category of its base?",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "13th International Conference on Chinese Grammar (ICCCG-13, hosted by Chongqing Normal University), 2025.10.24-10.29",
+    "year": 2025,
+    "pages": null,
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@inproceedings{chen2025icccg,\n  title={Can evaluative morphology change the lexical category of its base?},\n  author={Chen, Sijie},\n  booktitle={13th International Conference on Chinese Grammar (ICCCG-13)},\n  year={2025}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2024a-cha",
+    "type": "journal",
+    "title": "An etymological note of the word denoting INSERT in Wu Dialects",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Dialect",
+    "year": 2024,
+    "volume": "46(1)",
+    "pages": "21–28",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@article{chen2024cha,\n  title={An etymological note of the word denoting INSERT in Wu Dialects},\n  author={Chen, Sijie},\n  journal={Dialect},\n  volume={46},\n  number={1},\n  pages={21--28},\n  year={2024}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2024b-zhizhu",
+    "type": "journal",
+    "title": "A brief study on the synonyms of ‘spider’ and their etymology in Ancient Chinese",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Historical Geolinguistic Studies of the Languages in China",
+    "year": 2024,
+    "editors": "Suzuki, Hiroyuki and Mitsuaki Endo (eds.)",
+    "volume": "Volume 1",
+    "pages": "350–361",
+    "publisher": "Tokyo: Geolinguistic Society of Japan",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@incollection{chen2024zhizhu,\n  title={A brief study on the synonyms of spider and their etymology in Ancient Chinese},\n  author={Chen, Sijie},\n  editor={Suzuki, Hiroyuki and Endo, Mitsuaki},\n  booktitle={Historical Geolinguistic Studies of the Languages in China: Volume 1},\n  pages={350--361},\n  year={2024},\n  address={Tokyo},\n  publisher={Geolinguistic Society of Japan}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "c-2024-lishidili",
+    "type": "conference",
+    "title": "The Pronunciation and Etymological Character of \"Zhi\" in Words for \"Spider\" in Chinese Dialects",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Forum on Historical and Geographical Studies of Chinese Languages (2024) · Online, 2024.3.2-3.4",
+    "year": 2024,
+    "pages": null,
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@inproceedings{chen2024zhi2,\n  title={The Pronunciation and Etymological Character of \"Zhi\" in Words for \"Spider\" in Chinese Dialects},\n  author={Chen, Sijie},\n  booktitle={Forum on Historical and Geographical Studies of Chinese Languages (2024)},\n  year={2024}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "c-2024-yinyun",
+    "type": "conference",
+    "title": "Three types of abruptization in Chinese dialects",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "9th Forum for Young Scholars on Phonology and Dialects · 1st Gulang Graduate Forum on Chinese (hosted by Xiamen University), 2024.4.13-4.14\n30th Annual Meeting of the International Association of Chinese Linguistics (IACL-30, hosted by Yonsei University, South Korea), 2024.5.25-5.27",
+    "year": 2024,
+    "pages": null,
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@inproceedings{chen2024shusheng,\n  title={Three types of abruptization in Chinese dialects},\n  author={Chen, Sijie},\n  booktitle={9th Forum for Young Scholars on Phonology and Dialects},\n  year={2024}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2023a-dongwu",
+    "type": "journal",
+    "title": "A discussion on the entries for “animals” and “plants” in The Great Chinese Dictionary",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Lexicographical Studies",
+    "year": 2023,
+    "volume": "253",
+    "pages": "109–115",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@article{chen2023dongwu,\n  title={A discussion on the entries for animals and plants in The Great Chinese Dictionary},\n  author={Chen, Sijie},\n  journal={Lexicographical Studies},\n  number={253},\n  pages={109--115},\n  year={2023}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2023-hanzi",
+    "type": "journal",
+    "title": "Two questions on the relationship between Chinese Characters and Chinese Language",
+    "authors": [
+      {
+        "name": "Weihui Wang"
+      },
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Journal of School of Chinese Language and Culture Nanjing Normal University",
+    "year": 2023,
+    "volume": "4",
+    "pages": "1–12",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": "Also reprinted in: Zhao Yan (ed.), Studies on the Relationship between Chinese Words and Characters (III), Zhongxi Book Company, 2025, pp. 36–52.",
+    "bibtex": "@article{wangchen2023hanzi,\n  title={Two questions on the relationship between Chinese Characters and Chinese Language},\n  author={Wang, Weihui and Chen, Sijie},\n  journal={Journal of School of Chinese Language and Culture Nanjing Normal University},\n  number={4},\n  pages={1--12},\n  year={2023}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "j-2023b-bi",
+    "type": "journal",
+    "title": "Source of the entering tone of Bi (鼻) in Chinese revisited",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Historical Linguistics Studies",
+    "year": 2023,
+    "editors": "Yang, Yonglong (ed)",
+    "volume": "vol. 20",
+    "pages": "247–267",
+    "publisher": "Beijing: The Commercial Press",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@incollection{chen2023bi,\n  title={Source of the entering tone of Bi in Chinese revisited},\n  author={Chen, Sijie},\n  editor={Yang, Yonglong},\n  booktitle={Historical Linguistics Studies},\n  volume={20},\n  pages={247--267},\n  year={2023},\n  address={Beijing},\n  publisher={The Commercial Press}\n}",
+    "highlight": true,
+    "status": null
+  },
+  {
+    "id": "c-2023-yanchuang",
+    "type": "conference",
+    "title": "On the pronunciations and etymology of zhi (指) in words meaning “finger” in the Wu Dialects",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "\"Yanchuang Plan\" 2023 Academic Forum for Young Linguistics Students (hosted by University of Chinese Academy of Social Sciences), 2023.10.28-10.29\n21st Annual Meeting of the Zhejiang Linguistic Society, 2023.11.4-11.5",
+    "year": 2023,
+    "pages": null,
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@inproceedings{chen2023zhi2,\n  title={On the pronunciations and etymology of zhi in words meaning finger in the Wu Dialects},\n  author={Chen, Sijie},\n  booktitle={2023 Academic Forum for Young Linguistics Students},\n  year={2023}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "c-2022-puxue",
+    "type": "conference",
+    "title": "Source of the entering tone of Bi (鼻) in Chinese revisited",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "1st \"Puxue Zhiguang\" Graduate Academic Forum (co-hosted by Nanjing Normal University and Zhejiang University), 2022.8.20-8.21\nHigh-end Academic Forum on \"The Relationship between Form, Sound and Meaning of Chinese\" (co-hosted by Peking University, the Chinese Society of Exegesis and Sichuan University), 2022.9.17-9.18",
+    "year": 2022,
+    "pages": null,
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@inproceedings{chen2022bi,\n  title={Source of the entering tone of Bi in Chinese revisited},\n  author={Chen, Sijie},\n  booktitle={Proceedings of the 1st \"Puxue Zhiguang\" Graduate Academic Forum},\n  year={2022}\n}",
+    "highlight": false,
+    "status": null
+  },
+  {
+    "id": "c-2022-wufangyan",
+    "type": "conference",
+    "title": "The Etymological Character of \"Qian\"（扦） in Wu Dialects",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "11th Symposium on Wu Dialects (hosted by Fudan University), 2022.11.12-11.13",
+    "year": 2022,
+    "pages": null,
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@inproceedings{chen2022qian,\n  title={The Etymological Character of \"Qian\"（扦） in Wu Dialects},\n  author={Chen, Sijie},\n  booktitle={11th Symposium on Wu Dialects},\n  year={2022}\n}",
+    "highlight": false,
+    "status": null
+  }
+]

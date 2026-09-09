@@ -1,0 +1,120 @@
+---
+/**
+ * 基础布局：<head> SEO（hreflang 双语互指 / OG / JSON-LD）、语言检测内联脚本、全局样式
+ */
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { SiteData } from '../i18n/load';
+import { ENABLED_LOCALES } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const t = (k: string) => data.ui[k] ?? k;
+
+const title = `${data.profile.name} · ${data.profile.title}`;
+const description = t('meta.description');
+const siteOrigin = Astro.site?.origin ?? Astro.url.origin;
+const pathFor = (short: string) => (short === 'zh' ? '/' : `/${short}/`);
+const absUrl = (short: string) => new URL(pathFor(short), siteOrigin).href;
+
+// JSON-LD 结构化数据（Person）
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: data.profile.name,
+  jobTitle: data.profile.title,
+  affiliation: data.profile.affiliation,
+  email: `mailto:${data.profile.email}`,
+  image: new URL(data.profile.avatar, siteOrigin).href,
+  url: absUrl(data.locale.short),
+  sameAs: data.profile.links.map((l) => l.url),
+};
+const enEnabled = ENABLED_LOCALES.some((l) => l.short === 'en');
+---
+
+<!doctype html>
+<html lang={data.locale.code} dir={data.locale.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={data.profile.name} />
+
+    <!-- 规范化与双语 hreflang 互指（F14.10） -->
+    <link rel="canonical" href={absUrl(data.locale.short)} />
+    {ENABLED_LOCALES.map((loc) => (
+      <link rel="alternate" hreflang={loc.code} href={absUrl(loc.short)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={absUrl('zh')} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={absUrl(data.locale.short)} />
+    <meta property="og:locale" content={data.locale.code === 'zh' ? 'zh_CN' : 'en_US'} />
+    <meta property="og:image" content={new URL(data.profile.avatar, siteOrigin).href} />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!--
+      语言检测与偏好持久化（F14.6/F14.7）：尽早执行避免闪烁。
+      规则：localStorage 偏好 > 浏览器语言自动检测；显式 URL 访问会同步偏好。
+      锚点在切换后保持（location.hash 透传）。
+    -->
+    <script is:inline define:vars={{ enEnabled }}>
+      (function () {
+        try {
+          var cur = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'zh';
+          function urlFor(lang) {
+            var p = location.pathname;
+            var base;
+            if (lang === 'en') {
+              base = /^\/en(\/|$)/.test(p) ? p : '/en' + (p === '/' ? '/' : p);
+            } else {
+              base = p.replace(/^\/en(?=\/|$)/, '') || '/';
+            }
+            return base + location.hash;
+          }
+          var pref = null;
+          try {
+            pref = localStorage.getItem('lang');
+          } catch (e) {}
+          if (pref) {
+            if (pref !== cur && (pref === 'zh' || (pref === 'en' && enEnabled))) {
+              location.replace(urlFor(pref));
+              return;
+            }
+          } else {
+            var nav = (navigator.language || 'zh').toLowerCase();
+            var want = nav.indexOf('zh') === 0 ? 'zh' : nav.indexOf('en') === 0 ? 'en' : null;
+            if (want && want !== cur && (want === 'zh' || (want === 'en' && enEnabled))) {
+              location.replace(urlFor(want));
+              return;
+            }
+          }
+          try {
+            localStorage.setItem('lang', cur);
+          } catch (e) {}
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{t('a11y.skipToContent')}</a>
+    <Header data={data} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer data={data} />
+    <script>
+      import '../scripts/client';
+    </script>
+  </body>
+</html>

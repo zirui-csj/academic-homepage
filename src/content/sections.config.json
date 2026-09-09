@@ -1,0 +1,9 @@
+{
+  "sections": [
+    { "id": "education", "order": 1, "visible": true },
+    { "id": "research", "order": 2, "visible": true },
+    { "id": "publications", "order": 3, "visible": true },
+    { "id": "projects", "order": 4, "visible": true },
+    { "id": "awards", "order": 5, "visible": true }
+  ]
+}

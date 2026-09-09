@@ -1,0 +1,83 @@
+---
+/**
+ * F14 语言切换控件：导航栏右侧分段开关
+ * - 当前语言主题色高亮（aria-current 标记）
+ * - data-lang-link 供客户端脚本写入偏好 + 悬停预取
+ */
+import Icon from './Icon.astro';
+import type { SiteData } from '../i18n/load';
+import { ENABLED_LOCALES } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const t = (k: string) => data.ui[k] ?? k;
+const current = data.locale.short;
+// 单页站点：中文版首页 /，英文版首页 /en/；当前板块锚点由客户端脚本在切换时保持（F14.4）
+---
+
+<div class="lang-switch" role="group" aria-label={t('lang.switchLabel')}>
+  <Icon name="globe" size={15} />
+  <div class="seg">
+    {
+      ENABLED_LOCALES.map((loc) => (
+        <a
+          href={loc.short === 'zh' ? '/' : `/${loc.short}/`}
+          data-lang-link={loc.short}
+          class:list={['seg-btn', { 'is-active': loc.short === current }]}
+          aria-current={loc.short === current ? 'true' : undefined}
+          hrefLang={loc.code}
+        >
+          {loc.short === 'zh' ? t('lang.toChinese') : t('lang.toEnglish')}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--color-text-muted);
+  }
+  .seg {
+    display: inline-flex;
+    padding: 3px;
+    gap: 2px;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+  }
+  .seg-btn {
+    padding: 5px 13px;
+    border-radius: var(--radius-pill);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .seg-btn:hover {
+    color: var(--color-primary);
+  }
+  .seg-btn.is-active {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(59, 91, 219, 0.35);
+  }
+  .seg-btn.is-active:hover {
+    color: #fff;
+  }
+  @media (max-width: 767px) {
+    .lang-switch .seg-btn {
+      padding: 5px 10px;
+      font-size: 13px;
+    }
+  }
+</style>

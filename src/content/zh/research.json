@@ -1,0 +1,22 @@
+[
+  {
+    "id": "history",
+    "title": "汉语史",
+    "icon": "layers"
+  },
+  {
+    "id": "dialectology",
+    "title": "方言学",
+    "icon": "globe"
+  },
+  {
+    "id": "morphology",
+    "title": "词法学",
+    "icon": "brain"
+  },
+  {
+    "id": "morph-phon",
+    "title": "形态—音系界面",
+    "icon": "code"
+  }
+]

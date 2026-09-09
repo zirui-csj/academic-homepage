@@ -1,0 +1,160 @@
+---
+/** F3 研究兴趣：方向卡片（图标 + 名称，四色轮换） */
+import SectionShell from './SectionShell.astro';
+import Icon from './Icon.astro';
+import type { SiteData } from '../i18n/load';
+
+export interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+// 四个方向轮换配色：靛蓝 / 青绿 / 琥珀 / 珊瑚
+const palettes = ['blue', 'teal', 'amber', 'coral'] as const;
+---
+
+<SectionShell id="research" title={data.ui['section.research'] ?? 'Research'}>
+  <div class="research-grid">
+    {
+      data.research.map((r, i) => (
+        <article
+          class="research-card"
+          data-reveal
+          style={`--reveal-delay:${i * 80}ms`}
+          data-palette={palettes[i % palettes.length]}
+        >
+          <div class="research-icon">
+            <Icon name={r.icon ?? 'brain'} size={24} />
+          </div>
+          <h3 class="research-title">{r.title}</h3>
+          {r.keywords && r.keywords.length > 0 && (
+            <ul class="keyword-list">
+              {r.keywords.map((k) => <li class="keyword">{k}</li>)}
+            </ul>
+          )}
+          {r.description && <p class="research-desc">{r.description}</p>}
+        </article>
+      ))
+    }
+  </div>
+</SectionShell>
+
+<style>
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+  }
+  .research-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 20px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition:
+      transform var(--dur-mid) var(--ease-out),
+      box-shadow var(--dur-mid) var(--ease-out),
+      border-color var(--dur-mid) var(--ease-out);
+  }
+  .research-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+  }
+  .research-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-3);
+    transition: transform var(--dur-mid) var(--ease-out);
+  }
+  .research-card:hover .research-icon {
+    transform: scale(1.08) rotate(-4deg);
+  }
+  .research-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+  }
+  .research-title:last-child {
+    margin-bottom: 0;
+  }
+  .keyword-list {
+    list-style: none;
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px;
+  }
+  .keyword {
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .research-card:hover .keyword {
+    transform: translateY(-1px);
+  }
+  .research-desc {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* 四色轮换 */
+  [data-palette='blue'] .research-icon {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+  }
+  [data-palette='blue'] .keyword {
+    background: var(--color-primary-softer);
+    color: var(--color-primary);
+  }
+  [data-palette='teal'] .research-icon {
+    background: var(--color-accent-teal-soft);
+    color: var(--color-accent-teal);
+  }
+  [data-palette='teal'] .keyword {
+    background: var(--color-accent-teal-soft);
+    color: var(--color-accent-teal);
+  }
+  [data-palette='amber'] .research-icon {
+    background: var(--color-accent-amber-soft);
+    color: var(--color-accent-amber);
+  }
+  [data-palette='amber'] .keyword {
+    background: var(--color-accent-amber-soft);
+    color: var(--color-accent-amber);
+  }
+  [data-palette='coral'] .research-icon {
+    background: var(--color-accent-coral-soft);
+    color: var(--color-accent-coral);
+  }
+  [data-palette='coral'] .keyword {
+    background: var(--color-accent-coral-soft);
+    color: var(--color-accent-coral);
+  }
+
+  @media (max-width: 900px) {
+    .research-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+  }
+  @media (max-width: 520px) {
+    .research-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
