@@ -110,26 +110,40 @@ const typeClass: Record<string, string> = {
           <p class="pub-venue">
             {
               p.editors ? (
-                <>
-                  <span>In {p.editors}. </span>
-                  <em>{p.venue}</em>
-                  {p.volume && <span> ({p.volume})</span>}
-                  {p.pages && <span>, {p.pages}</span>}
-                  {p.publisher && <span>. {p.publisher}</span>}
-                </>
+                data.locale.short === 'zh' ? (
+                  <>
+                    <span>{p.editors} </span>
+                    <em>{p.venue}</em>
+                    {p.volume && <span>（{p.volume}）</span>}
+                    {p.pages && <span>，pp. {p.pages}</span>}
+                    {p.publisher && <span>。{p.publisher}</span>}
+                    <span>, {p.year}</span>
+                    {p.note && <span>{p.note}</span>}
+                  </>
+                ) : (
+                  <>
+                    <span>In {p.editors}. </span>
+                    <em>{p.venue}</em>
+                    {p.volume && <span> ({p.volume})</span>}
+                    {p.pages && <span>, {p.pages}</span>}
+                    {p.publisher && <span>. {p.publisher}</span>}
+                    {p.note && <span> {p.note}</span>}
+                  </>
+                )
               ) : (
                 <>
                   <em>{p.venue}</em>
                   {p.volume && <span>, {p.volume}</span>}
                   {p.pages && <span>, pp. {p.pages}</span>}
                   {p.type !== 'conference' && <span>, {p.year}</span>}
+                  {p.note && <span>{p.note}</span>}
                 </>
               )
             }
           </p>
 
           {
-            p.abstract && (
+            p.abstract && p.type !== 'journal' && (
               <details class="pub-details">
                 <summary>
                   <Icon name="chevron" size={14} />

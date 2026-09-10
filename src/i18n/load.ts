@@ -71,6 +71,8 @@ const publicationSchema = z.object({
   pdf: z.string().nullable().optional(),
   code: z.string().nullable().optional(),
   abstract: z.string().nullable().optional(),
+  /** 引证附注（如转载信息），直接拼接在出处行末尾 */
+  note: z.string().nullable().optional(),
   bibtex: z.string().nullable().optional(),
   highlight: z.boolean().optional(),
   status: z.string().nullable().optional(),
