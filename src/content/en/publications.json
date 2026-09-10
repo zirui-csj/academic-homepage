@@ -1,26 +1,24 @@
 [
   {
-    "id": "j-2026a-lanxi",
+    "id": "j-2026c-zhi",
     "type": "journal",
-    "title": "The homophony syllabary of the Lanxi Dialect in Zhejiang Province",
+    "title": "On the pronunciations and etymology of zhi (指) in words meaning “finger” in the Wu Dialects",
     "authors": [
       {
         "name": "Sijie Chen",
         "isSelf": true
       }
     ],
-    "venue": "Journal of Language and Culture Studies",
+    "venue": "Essays on Linguistics",
     "year": 2026,
-    "editors": "Xing, Xiangdong (ed)",
-    "volume": "vol. 13",
-    "pages": "157–197",
-    "publisher": "Shanghai: Shanghai Lexicographical Publishing House",
+    "volume": "3",
+    "pages": "84–96",
     "doi": null,
     "url": null,
     "pdf": null,
     "code": null,
     "abstract": null,
-    "bibtex": "@incollection{chen2026lanxi,\n  title={The homophony syllabary of the Lanxi Dialect in Zhejiang Province},\n  author={Chen, Sijie},\n  editor={Xing, Xiangdong},\n  booktitle={Journal of Language and Culture Studies},\n  volume={13},\n  pages={157--197},\n  year={2026},\n  address={Shanghai},\n  publisher={Shanghai Lexicographical Publishing House}\n}",
+    "bibtex": "@article{chen2026zhi,\n  title={On the pronunciations and etymology of zhi in words meaning finger in the Wu Dialects},\n  author={Chen, Sijie},\n  journal={Essays on Linguistics},\n  number={3},\n  pages={84--96},\n  year={2026}\n}",
     "highlight": false,
     "status": null
   },
@@ -50,25 +48,27 @@
     "status": null
   },
   {
-    "id": "j-2026c-zhi",
+    "id": "j-2026a-lanxi",
     "type": "journal",
-    "title": "On the pronunciations and etymology of zhi (指) in words meaning “finger” in the Wu Dialects",
+    "title": "The homophony syllabary of the Lanxi Dialect in Zhejiang Province",
     "authors": [
       {
         "name": "Sijie Chen",
         "isSelf": true
       }
     ],
-    "venue": "Essays on Linguistics",
+    "venue": "Journal of Language and Culture Studies",
     "year": 2026,
-    "volume": "3",
-    "pages": "84–96",
+    "editors": "Xing, Xiangdong (ed)",
+    "volume": "vol. 13",
+    "pages": "157–197",
+    "publisher": "Shanghai: Shanghai Lexicographical Publishing House",
     "doi": null,
     "url": null,
     "pdf": null,
     "code": null,
     "abstract": null,
-    "bibtex": "@article{chen2026zhi,\n  title={On the pronunciations and etymology of zhi in words meaning finger in the Wu Dialects},\n  author={Chen, Sijie},\n  journal={Essays on Linguistics},\n  number={3},\n  pages={84--96},\n  year={2026}\n}",
+    "bibtex": "@incollection{chen2026lanxi,\n  title={The homophony syllabary of the Lanxi Dialect in Zhejiang Province},\n  author={Chen, Sijie},\n  editor={Xing, Xiangdong},\n  booktitle={Journal of Language and Culture Studies},\n  volume={13},\n  pages={157--197},\n  year={2026},\n  address={Shanghai},\n  publisher={Shanghai Lexicographical Publishing House}\n}",
     "highlight": false,
     "status": null
   },
@@ -235,29 +235,6 @@
     "status": null
   },
   {
-    "id": "j-2023a-dongwu",
-    "type": "journal",
-    "title": "A discussion on the entries for “animals” and “plants” in The Great Chinese Dictionary",
-    "authors": [
-      {
-        "name": "Sijie Chen",
-        "isSelf": true
-      }
-    ],
-    "venue": "Lexicographical Studies",
-    "year": 2023,
-    "volume": "253",
-    "pages": "109–115",
-    "doi": null,
-    "url": null,
-    "pdf": null,
-    "code": null,
-    "abstract": null,
-    "bibtex": "@article{chen2023dongwu,\n  title={A discussion on the entries for animals and plants in The Great Chinese Dictionary},\n  author={Chen, Sijie},\n  journal={Lexicographical Studies},\n  number={253},\n  pages={109--115},\n  year={2023}\n}",
-    "highlight": false,
-    "status": null
-  },
-  {
     "id": "j-2023-hanzi",
     "type": "journal",
     "title": "Two questions on the relationship between Chinese Characters and Chinese Language",
@@ -306,6 +283,29 @@
     "abstract": null,
     "bibtex": "@incollection{chen2023bi,\n  title={Source of the entering tone of Bi in Chinese revisited},\n  author={Chen, Sijie},\n  editor={Yang, Yonglong},\n  booktitle={Historical Linguistics Studies},\n  volume={20},\n  pages={247--267},\n  year={2023},\n  address={Beijing},\n  publisher={The Commercial Press}\n}",
     "highlight": true,
+    "status": null
+  },
+  {
+    "id": "j-2023a-dongwu",
+    "type": "journal",
+    "title": "A discussion on the entries for “animals” and “plants” in The Great Chinese Dictionary",
+    "authors": [
+      {
+        "name": "Sijie Chen",
+        "isSelf": true
+      }
+    ],
+    "venue": "Lexicographical Studies",
+    "year": 2023,
+    "volume": "253",
+    "pages": "109–115",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@article{chen2023dongwu,\n  title={A discussion on the entries for animals and plants in The Great Chinese Dictionary},\n  author={Chen, Sijie},\n  journal={Lexicographical Studies},\n  number={253},\n  pages={109--115},\n  year={2023}\n}",
+    "highlight": false,
     "status": null
   },
   {

@@ -1,24 +1,24 @@
 [
   {
-    "id": "j-2026a-lanxi",
+    "id": "j-2026c-zhi",
     "type": "journal",
-    "title": "浙江兰溪方言同音字汇",
+    "title": "吴语“手指”义词中“指”的读音与本字",
     "authors": [
       {
         "name": "陈思捷",
         "isSelf": true
       }
     ],
-    "venue": "语言与文化论丛",
+    "venue": "语言学论丛",
     "year": 2026,
-    "volume": "第十三辑",
-    "pages": "157–197",
+    "volume": "第3期",
+    "pages": "84–96",
     "doi": null,
     "url": null,
     "pdf": null,
     "code": null,
     "abstract": null,
-    "bibtex": "@article{chen2026lanxi,\n  title={浙江兰溪方言同音字汇},\n  author={陈思捷},\n  journal={语言与文化论丛},\n  volume={13},\n  pages={157--197},\n  year={2026}\n}",
+    "bibtex": "@article{chen2026zhi,\n  title={吴语“手指”义词中“指”的读音与本字},\n  author={陈思捷},\n  journal={语言学论丛},\n  number={3},\n  pages={84--96},\n  year={2026}\n}",
     "highlight": false,
     "status": null
   },
@@ -46,25 +46,25 @@
     "status": null
   },
   {
-    "id": "j-2026c-zhi",
+    "id": "j-2026a-lanxi",
     "type": "journal",
-    "title": "吴语“手指”义词中“指”的读音与本字",
+    "title": "浙江兰溪方言同音字汇",
     "authors": [
       {
         "name": "陈思捷",
         "isSelf": true
       }
     ],
-    "venue": "语言学论丛",
+    "venue": "语言与文化论丛",
     "year": 2026,
-    "volume": "第3期",
-    "pages": "84–96",
+    "volume": "第十三辑",
+    "pages": "157–197",
     "doi": null,
     "url": null,
     "pdf": null,
     "code": null,
     "abstract": null,
-    "bibtex": "@article{chen2026zhi,\n  title={吴语“手指”义词中“指”的读音与本字},\n  author={陈思捷},\n  journal={语言学论丛},\n  number={3},\n  pages={84--96},\n  year={2026}\n}",
+    "bibtex": "@article{chen2026lanxi,\n  title={浙江兰溪方言同音字汇},\n  author={陈思捷},\n  journal={语言与文化论丛},\n  volume={13},\n  pages={157--197},\n  year={2026}\n}",
     "highlight": false,
     "status": null
   },
@@ -231,29 +231,6 @@
     "status": null
   },
   {
-    "id": "j-2023a-dongwu",
-    "type": "journal",
-    "title": "〈汉语大词典〉“动物”“植物”条商榷",
-    "authors": [
-      {
-        "name": "陈思捷",
-        "isSelf": true
-      }
-    ],
-    "venue": "辞书研究",
-    "year": 2023,
-    "volume": "第1期",
-    "pages": "109–115",
-    "doi": null,
-    "url": null,
-    "pdf": null,
-    "code": null,
-    "abstract": null,
-    "bibtex": "@article{chen2023dongwu,\n  title={〈汉语大词典〉“动物”“植物”条商榷},\n  author={陈思捷},\n  journal={辞书研究},\n  number={1},\n  pages={109--115},\n  year={2023}\n}",
-    "highlight": false,
-    "status": null
-  },
-  {
     "id": "j-2023-hanzi",
     "type": "journal",
     "title": "汉字与汉语关系二题",
@@ -301,6 +278,29 @@
     "abstract": null,
     "bibtex": "@article{chen2023bi,\n  title={再论“鼻”字入声的来源},\n  author={陈思捷},\n  journal={历史语言学研究},\n  volume={20},\n  pages={247--267},\n  year={2023}\n}",
     "highlight": true,
+    "status": null
+  },
+  {
+    "id": "j-2023a-dongwu",
+    "type": "journal",
+    "title": "《汉语大词典》“动物”“植物”条商榷",
+    "authors": [
+      {
+        "name": "陈思捷",
+        "isSelf": true
+      }
+    ],
+    "venue": "辞书研究",
+    "year": 2023,
+    "volume": "第1期",
+    "pages": "109–115",
+    "doi": null,
+    "url": null,
+    "pdf": null,
+    "code": null,
+    "abstract": null,
+    "bibtex": "@article{chen2023dongwu,\n  title={《汉语大词典》“动物”“植物”条商榷},\n  author={陈思捷},\n  journal={辞书研究},\n  number={1},\n  pages={109--115},\n  year={2023}\n}",
+    "highlight": false,
     "status": null
   },
   {
